@@ -10,6 +10,7 @@ import com.trs.movie_ticket_reservation_system.exceptions.ShowDoesNotExists;
 import com.trs.movie_ticket_reservation_system.exceptions.UserDoesNotExists;
 import com.trs.movie_ticket_reservation_system.repositories.ShowRepository;
 import com.trs.movie_ticket_reservation_system.repositories.TicketRepository;
+import com.trs.movie_ticket_reservation_system.repositories.UserRepository;
 import com.trs.movie_ticket_reservation_system.request.TicketRequest;
 import com.trs.movie_ticket_reservation_system.response.TicketResponse;
 import org.springframework.beans.factory.annotation.Autowired;
