@@ -1,5 +1,6 @@
 package com.trs.movie_ticket_reservation_system.controllers;
 
+import com.trs.movie_ticket_reservation_system.config.JWTService;
 import com.trs.movie_ticket_reservation_system.request.UserRequest;
 import com.trs.movie_ticket_reservation_system.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
