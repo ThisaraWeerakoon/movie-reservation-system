@@ -1,6 +1,7 @@
 package com.trs.movie_ticket_reservation_system.controllers;
 
 import com.trs.movie_ticket_reservation_system.request.ShowRequest;
+import com.trs.movie_ticket_reservation_system.services.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -5,10 +5,12 @@ import com.trs.movie_ticket_reservation_system.entities.Movie;
 import com.trs.movie_ticket_reservation_system.entities.Show;
 import com.trs.movie_ticket_reservation_system.entities.Theater;
 import com.trs.movie_ticket_reservation_system.exceptions.MovieDoesNotExists;
+import com.trs.movie_ticket_reservation_system.exceptions.TheaterDoesNotExists;
 import com.trs.movie_ticket_reservation_system.repositories.MovieRepository;
 import com.trs.movie_ticket_reservation_system.repositories.ShowRepository;
 import com.trs.movie_ticket_reservation_system.repositories.TheaterRepository;
 import com.trs.movie_ticket_reservation_system.request.ShowRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
