@@ -1,6 +1,5 @@
 package com.trs.movie_ticket_reservation_system.controllers;
 
-import com.trs.movie_ticket_reservation_system.config.JWTService;
 import com.trs.movie_ticket_reservation_system.request.UserRequest;
 import com.trs.movie_ticket_reservation_system.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JWTService jwtService;
 
     @PostMapping("/addNew")
     public ResponseEntity<String> addNewUser(@RequestBody UserRequest userEntryDto) {
@@ -35,15 +29,4 @@ public class UserController {
         }
     }
 
-    @PostMapping("/getToken")
-    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-
-        if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getUsername());
-        }
-
-        throw new UsernameNotFoundException("invalid user details.");
-    }
 }
