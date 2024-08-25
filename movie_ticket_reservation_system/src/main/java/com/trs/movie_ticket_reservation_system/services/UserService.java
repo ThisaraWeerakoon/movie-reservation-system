@@ -21,8 +21,9 @@ public class UserService {
 
     public String addUser( UserRequest userRequest) {
 
+        Optional<User> users = userRepository.findByEmailId(userRequest.getEmailId());
 
-        if(userRepository.findByEmailId( userRequest.getEmailId()) != null){
+        if(users.isPresent()){
             System.out.println("Hello ");
             throw new UserExist();
         }
