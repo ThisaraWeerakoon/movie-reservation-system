@@ -12,10 +12,12 @@ import com.trs.movie_ticket_reservation_system.repositories.TheaterRepository;
 import com.trs.movie_ticket_reservation_system.request.ShowRequest;
 import com.trs.movie_ticket_reservation_system.request.ShowSeatRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ShowService {
     @Autowired
     private MovieRepository movieRepository;

@@ -23,6 +23,7 @@ public class UserService {
 
 
         if(userRepository.findByEmailId( userRequest.getEmailId()) != null){
+            System.out.println("Hello ");
             throw new UserExist();
         }
 
