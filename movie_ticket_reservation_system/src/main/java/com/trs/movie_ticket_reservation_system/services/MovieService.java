@@ -8,6 +8,8 @@ import com.trs.movie_ticket_reservation_system.request.MovieRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MovieService {
     @Autowired
@@ -26,5 +28,9 @@ public class MovieService {
         return "The movie has been added successfully";
 
 
+    }
+
+    public List<Movie> getAllMovies() {
+        return movieRepository.findAll();
     }
 }
