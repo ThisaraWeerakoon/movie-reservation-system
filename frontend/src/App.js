@@ -1,135 +1,166 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { styled } from '@mui/material/styles';
+// App.js
+import React, { useState } from 'react';
+import './App.css';
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  marginLeft: 'auto',
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+function App() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    mobile: '',
+    gender: 'male',
+    married: 'no',
+    alerts: false,
+    day: '',
+    month: '',
+    year: '',
+  });
 
-function RecipeReviewCard({ image, title, subheader, content }) {
-  const [expanded, setExpanded] = React.useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+  };
+
+  const toggleSettings = () => {
+    setShowSettings(!showSettings);
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={title}
-        subheader={subheader}
-      />
-      <CardMedia
-        component="img"
-        height="194"
-        image={image}
-        alt={title}
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {content}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            {/* Insert the content or method details here */}
-          </Typography>
-        </CardContent>
-      </Collapse>
-    </Card>
+    <div className="App">
+      <button className="settings-button" onClick={toggleSettings}>
+        Settings
+      </button>
+
+      {showSettings && (
+        <form onSubmit={handleSubmit} className="edit-profile-form">
+          <div>
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              placeholder="First Name"
+            />
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              placeholder="Last Name"
+            />
+          </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email"
+            />
+            <input
+              type="text"
+              name="mobile"
+              value={formData.mobile}
+              onChange={handleChange}
+              placeholder="Mobile"
+            />
+          </div>
+          <div className="gender">
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="male"
+                checked={formData.gender === 'male'}
+                onChange={handleChange}
+              />
+              Male
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="female"
+                checked={formData.gender === 'female'}
+                onChange={handleChange}
+              />
+              Female
+            </label>
+          </div>
+          <div className="birthdate">
+            <select name="day" value={formData.day} onChange={handleChange}>
+              <option value="">Day</option>
+              {[...Array(31)].map((_, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+            <select name="month" value={formData.month} onChange={handleChange}>
+              <option value="">Month</option>
+              {[...Array(12)].map((_, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+            <select name="year" value={formData.year} onChange={handleChange}>
+              <option value="">Year</option>
+              {[...Array(101)].map((_, i) => (
+                <option key={1920 + i} value={1920 + i}>
+                  {1920 + i}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="married">
+            <label>
+              <input
+                type="radio"
+                name="married"
+                value="yes"
+                checked={formData.married === 'yes'}
+                onChange={handleChange}
+              />
+              Yes
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="married"
+                value="no"
+                checked={formData.married === 'no'}
+                onChange={handleChange}
+              />
+              No
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                name="alerts"
+                checked={formData.alerts}
+                onChange={handleChange}
+              />
+              Get Alerts on mobile for new movies and events.
+            </label>
+          </div>
+          <button type="submit" className="update-button">Update</button>
+        </form>
+      )}
+    </div>
   );
 }
 
-export default function SpacingGrid() {
-  return (
-    <Grid container spacing={12}>
-      <Grid item xs={12}>
-        <Grid container spacing={12} sx={{ justifyContent: 'center' }}>
-          {[0, 1, 2].map((value) => (
-            <Grid key={value} item>
-              <RecipeReviewCard
-                image={`/static/images/cards/paella${value + 1}.jpg`}
-                title={`Dish ${value + 1}`}
-                subheader="September 14, 2016"
-                content="This is a description of the dish."
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Grid container spacing={12} sx={{ justifyContent: 'center' }}>
-          {[3, 4, 5].map((value) => (
-            <Grid key={value} item>
-              <RecipeReviewCard
-                image={`/static/images/cards/paella${value + 1}.jpg`}
-                title={`Dish ${value + 1}`}
-                subheader="September 14, 2016"
-                content="This is a description of the dish."
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Grid container spacing={12} sx={{ justifyContent: 'center' }}>
-          {[6, 7, 8].map((value) => (
-            <Grid key={value} item>
-              <RecipeReviewCard
-                image={`/static/images/cards/paella${value + 1}.jpg`}
-                title={`Dish ${value + 1}`}
-                subheader="September 14, 2016"
-                content="This is a description of the dish."
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Grid>
-    </Grid>
-  );
-}
+export default App;
