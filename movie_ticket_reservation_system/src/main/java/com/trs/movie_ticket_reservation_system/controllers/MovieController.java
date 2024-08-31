@@ -1,14 +1,14 @@
 package com.trs.movie_ticket_reservation_system.controllers;
 
+import com.trs.movie_ticket_reservation_system.entities.Movie;
 import com.trs.movie_ticket_reservation_system.request.MovieRequest;
 import com.trs.movie_ticket_reservation_system.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/movie")
@@ -25,5 +25,13 @@ public class MovieController{
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/getAllMovies")
+    public List<Movie> getAllMovies() {
+        return movieService.getAllMovies();
+    }
+
+
+
 
 }

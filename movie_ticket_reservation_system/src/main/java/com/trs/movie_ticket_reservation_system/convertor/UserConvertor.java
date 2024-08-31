@@ -12,6 +12,8 @@ public class UserConvertor {
                 .age(userRequest.getAge())
                 .address(userRequest.getAddress())
                 .gender(userRequest.getGender())
+                .emailId(userRequest.getEmailId())
+                .mobileNo(userRequest.getMobileNo())
                 .build();
 
         return user;
