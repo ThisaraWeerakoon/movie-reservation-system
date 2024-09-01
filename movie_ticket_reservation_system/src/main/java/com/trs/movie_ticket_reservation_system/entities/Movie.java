@@ -40,6 +40,12 @@ public class Movie {
     @Enumerated(value = EnumType.STRING)
     private Language language;
 
+    private String imageURL;
+
+    private String description;
+
+    private String director;
+
     @OneToMany(mappedBy = "movie",cascade = CascadeType.ALL)
     private List<Show> shows = new ArrayList<>();
 }

@@ -2,6 +2,7 @@ package com.trs.movie_ticket_reservation_system.controllers;
 
 import com.trs.movie_ticket_reservation_system.entities.Movie;
 import com.trs.movie_ticket_reservation_system.request.MovieRequest;
+import com.trs.movie_ticket_reservation_system.response.MovieResponse;
 import com.trs.movie_ticket_reservation_system.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,9 @@ public class MovieController{
         }
     }
 
-    @GetMapping("/getAllMovies")
-    public List<Movie> getAllMovies() {
+    @GetMapping
+    public List<MovieResponse> getAllMovies() {
+
         return movieService.getAllMovies();
     }
 

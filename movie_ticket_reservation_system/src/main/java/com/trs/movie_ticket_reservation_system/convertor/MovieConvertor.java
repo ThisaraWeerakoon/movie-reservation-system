@@ -12,6 +12,9 @@ public class MovieConvertor {
                 .language(movieRequest.getLanguage())
                 .releaseDate(movieRequest.getReleaseDate())
                 .rating(movieRequest.getRating())
+                .description(movieRequest.getDescription())
+                .director(movieRequest.getDirector())
+                .imageURL(movieRequest.getImageURL())
                 .build();
 
         return movie;

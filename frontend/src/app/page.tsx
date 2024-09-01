@@ -2,17 +2,32 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import Link from 'next/link';
 
-// Mock data for movies
-const movies = [
-  { id: 1, title: 'Inception', image: '/card.jpg' },
-  { id: 2, title: 'The Dark Knight', image: '/card.jpg' },
-  { id: 3, title: 'Interstellar', image: '/card.jpg' },
-  { id: 4, title: 'Pulp Fiction', image: '/card.jpg' },
-  { id: 5, title: 'The Matrix', image: '/card.jpg' },
-  { id: 6, title: 'Forrest Gump', image: '/card.jpg' },
-];
+// Define the Movie interface
+interface Movie {
+  id: number;
+  movieName: string;
+  duration: number;
+  rating: number;
+  releaseDate: string;
+  genre: string;
+  language: string;
+  imageURL: string;
+  description: string;
+  director: string;
+}
 
-export default function Home() {
+// Fetch data directly in the component
+export default async function Home() {
+  let movies: Movie[] = [];
+
+  try {
+    // Fetch data from your backend API
+    const res = await fetch('http://localhost:8080/movie', { cache: 'no-store' });  // Prevent caching for fresh data
+    movies = await res.json();  // Parse the JSON response to get the movies
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+  }
+
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Available Movies</h1>
@@ -20,8 +35,12 @@ export default function Home() {
         {movies.map((movie) => (
           <Card key={movie.id}>
             <CardContent className="p-4">
-              <img src={movie.image} alt={movie.title} className="w-full h-64 object-cover mb-4 rounded" />
-              <h2 className="text-xl font-semibold mb-2">{movie.title}</h2>
+              <img
+                src={movie.imageURL}
+                alt={movie.movieName}
+                className="w-full h-64 object-cover mb-4 rounded"
+              />
+              <h2 className="text-xl font-semibold mb-2">{movie.movieName}</h2>
             </CardContent>
             <CardFooter>
               <Link href={`/movie/${movie.id}`} passHref>
