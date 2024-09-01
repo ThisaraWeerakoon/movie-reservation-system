@@ -1,0 +1,11 @@
+INSERT INTO theaters (name, address) VALUES
+('Savoy', 'Wellawatte'),
+('Liberty', 'Colombo 03'),
+('Majestic City', 'Bambalapitiya'),
+('Empire', 'Colombo 07'),
+('Regal', 'Colombo 02'),
+('Ritz', 'Colombo 05'),
+('Cine City', 'Maradana'),
+('Scope Cinemas', 'Colombo 07'),
+('Tharangani', 'Nugegoda'),
+('Cineplex', 'Katunayake');
