@@ -35,6 +35,8 @@ This project uses MySQL as the database. Follow these steps to set up the databa
 2. Create a new database named movie_ticket_booking.
 3. Update the database configuration in `application.properties` file.
 
+<img width="1440" alt="Screenshot 2024-09-01 at 12 14 14" src="https://github.com/user-attachments/assets/eefe08cc-7adc-4ccc-8abb-83c2d1336689">
+
 
 ## API Documentation
 The API documentation for this project can be found at `http://localhost:8080/swagger-ui.html`. It provides detailed information about each API, including request/response formats and parameters.
