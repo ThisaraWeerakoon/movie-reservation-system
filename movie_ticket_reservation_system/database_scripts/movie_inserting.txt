@@ -1,0 +1,23 @@
+USE movie_ticket_reservation_system;
+
+INSERT INTO movies (
+    movie_name, 
+    duration, 
+    rating, 
+    release_date, 
+    genre, 
+    language, 
+    imageurl, 
+    description, 
+    director
+) VALUES 
+    ('Interstellar', 120, 9, '2024-06-18', 'SCIFI', 'ENGLISH', 'interstellar.jpeg', 'When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.', 'Christopher Nolan'),
+    ('Avengers', 143, 8, '2012-05-04', 'ACTION', 'ENGLISH', 'avengers.jpeg', 'Earth\'s mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.', 'Joss Whedon'),
+    ('The Dark Knight', 152, 9, '2008-07-18', 'ACTION', 'ENGLISH', 'dark_knight.jpeg', 'When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham. The Dark Knight must accept one of the greatest psychological and physical tests of his ability to fight injustice.', 'Christopher Nolan'),
+    ('The Imitation Game', 113, 8, '2014-11-28', 'DRAMA', 'ENGLISH', 'imitation_game.jpeg', 'During World War II, the English mathematical genius Alan Turing tries to crack the German Enigma code with help from fellow mathematicians.', 'Morten Tyldum'),
+    ('Memento', 113, 8, '2000-09-05', 'THRILLER', 'ENGLISH', 'memento.jpeg', 'A man with short-term memory loss attempts to track down his wife\'s murderer.', 'Christopher Nolan'),
+    ('Oppenheimer', 180, 9, '2023-07-21', 'BIOGRAPHY', 'ENGLISH', 'oppenheimer.jpeg', 'The story of J. Robert Oppenheimer, the scientist who developed the atomic bomb during World War II, and the ethical dilemmas he faced.', 'Christopher Nolan'),
+    ('The Theory of Everything', 123, 7, '2014-11-26', 'BIOGRAPHY', 'ENGLISH', 'theory_of_everything.jpeg', 'A look at the relationship between the famous physicist Stephen Hawking and his wife.', 'James Marsh'),
+    ('Wolverine', 126, 7, '2013-07-26', 'ACTION', 'ENGLISH', 'wolverine.jpeg', 'When Wolverine is summoned to Japan by an old acquaintance, he is embroiled in a conflict that forces him to confront his own demons.', 'James Mangold'),
+    ('Avatar', 162, 8, '2009-12-18', 'SCIFI', 'ENGLISH', 'avatar.jpeg', 'A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.', 'James Cameron'),
+    ('Inception', 120, 9, '2024-06-18', 'SCIFI', 'ENGLISH', 'inception.jpeg', 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.', 'Christopher Nolan');
