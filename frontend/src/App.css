@@ -1,53 +1,83 @@
 /* App.css */
 
-.App {
-  font-family: Arial, sans-serif;
+/* Existing styles... */
+
+.quickpay-section {
   padding: 20px;
 }
 
-.quickpay-button {
-  background-color: #2c3e50; /* Dark blue button */
-  border: none;
-  color: white;
-  cursor: pointer;
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.quickpay-button:hover {
-  background-color: #34495e; /* Slightly darker blue on hover */
-}
-
-.quickpay-section {
-  margin-top: 20px;
-}
-
 .card-container {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 15px;
+  background-color: #f9f9f9;
+  padding: 20px;
   margin-bottom: 20px;
-  background-color: #f8f8f8; /* Light gray background */
+  border-radius: 8px;
 }
 
 .card-header {
-  font-size: 16px;
   font-weight: bold;
+  font-size: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .add-button {
-  color: #e74c3c; /* Red color for add button */
+  color: #3498db;
   cursor: pointer;
 }
 
 .card-body {
   font-size: 14px;
-  color: #7f8c8d; /* Gray color for text */
+  color: #7f8c8d;
+}
+
+.card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-inputs input {
+  width: 60px;
+  padding: 5px;
+  margin: 5px 2px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.card-expiry input {
+  width: 60px;
+  padding: 5px;
+  margin: 5px 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.save-card-button,
+.close-form-button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
   margin-top: 10px;
+}
+
+.save-card-button:hover,
+.close-form-button:hover {
+  background-color: #2980b9;
+}
+
+.close-form-button {
+  background-color: #e74c3c;
+}
+
+.close-form-button:hover {
+  background-color: #c0392b;
 }
 
