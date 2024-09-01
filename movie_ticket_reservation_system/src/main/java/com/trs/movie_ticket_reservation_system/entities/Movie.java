@@ -48,4 +48,26 @@ public class Movie {
 
     @OneToMany(mappedBy = "movie",cascade = CascadeType.ALL)
     private List<Show> shows = new ArrayList<>();
+
+    //getters and setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
+
+
 }
+
+
