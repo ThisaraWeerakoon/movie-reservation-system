@@ -19,6 +19,8 @@ This project is a Spring Boot implementation of the backend APIs for a ticket bo
 * MySQL (as the database)
 * Maven (for dependency management)
 
+<img width="1440" alt="Screenshot 2024-09-01 at 12 18 23" src="https://github.com/user-attachments/assets/506fddc2-9a19-4a64-9bb4-545db038cd96">
+
 ## Getting Started
 To set up the project on your local machine, follow these steps:
 
