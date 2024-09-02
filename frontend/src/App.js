@@ -1,45 +1,24 @@
-// App.js
-import React, { useState } from 'react';
-import './App.css';
+import React from 'react';
+import { Container, TextField, Typography, Box } from '@mui/material';
 
 function App() {
-  const [showQuickPay, setShowQuickPay] = useState(false);
-
-  const toggleQuickPay = () => {
-    setShowQuickPay(!showQuickPay);
-  };
-
   return (
-    <div className="App">
-      {/* QuickPay Button */}
-      <button className="quickpay-button" onClick={toggleQuickPay}>
-        QuickPay
-      </button>
-
-      {/* QuickPay Section */}
-      {showQuickPay && (
-        <div className="quickpay-section">
-          <div className="card-container">
-            <div className="card-header">
-              Credit/Debit Cards
-              <span className="add-button">+ Add</span>
-            </div>
-            <div className="card-body">
-              You don't have any Credit/Debit cards added to QuikPay.
-            </div>
-          </div>
-
-          <div className="card-container">
-            <div className="card-header">
-              Other Wallets
-            </div>
-            <div className="card-body">
-              You don't have any External Wallets added to QuikPay.
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+    <Container maxWidth="sm">
+      <Box mb={4}>
+        <Typography variant="h6" gutterBottom>
+          Add Movie
+        </Typography>
+        <TextField label="Movie Name" variant="outlined" fullWidth margin="normal" />
+        <TextField label="Duration" variant="outlined" fullWidth margin="normal" />
+        <TextField label="Rating" variant="outlined" fullWidth margin="normal" />
+        <TextField label="Release date" variant="outlined" fullWidth margin="normal" />
+        <TextField label="Genre" variant="outlined" fullWidth margin="normal" />
+        <TextField label="Language" variant="outlined" fullWidth margin="normal" />
+        <TextField label="URL of the movie image" variant="outlined" fullWidth margin="normal" />
+        <TextField label="Description" variant="outlined" fullWidth margin="normal" />
+        <TextField label="Director" variant="outlined" fullWidth margin="normal" />
+      </Box>
+    </Container>
   );
 }
 
