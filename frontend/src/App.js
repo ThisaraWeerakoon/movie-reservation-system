@@ -10,6 +10,7 @@ function App() {
   };
 
   return (
+<<<<<<< Updated upstream
     <div className="App">
       {/* QuickPay Button */}
       <button className="quickpay-button" onClick={toggleQuickPay}>
@@ -40,6 +41,17 @@ function App() {
         </div>
       )}
     </div>
+=======
+    <Container maxWidth="sm">
+      <Box mb={4}>
+        <Typography variant="h6" gutterBottom>
+          Add Theater
+        </Typography>
+        <TextField label="Theater Name" variant="outlined" fullWidth margin="normal" />
+        <TextField label="Theater Address" variant="outlined" fullWidth margin="normal" />
+      </Box>
+    </Container>
+>>>>>>> Stashed changes
   );
 }
 
