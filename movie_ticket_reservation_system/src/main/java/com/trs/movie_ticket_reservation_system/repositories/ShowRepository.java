@@ -1,6 +1,7 @@
 package com.trs.movie_ticket_reservation_system.repositories;
 
 import com.trs.movie_ticket_reservation_system.entities.Show;
+import com.trs.movie_ticket_reservation_system.response.ShowResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,5 +20,11 @@ public interface ShowRepository extends JpaRepository<Show, Integer> {
 
     @Query(value = "select * from shows where movie_id = :movieId" , nativeQuery = true)
     public List<Show> getAllShowsOfMovie(@Param("movieId")Integer movieId);
+
+//    @Query("SELECT new com.trs.movie_ticket_reservation_system.response.ShowResponse(t.name, t.address, s.time) " +
+//            "FROM Show s JOIN s.theater t " +
+//            "WHERE s.movieId = :movieId AND s.date = :date " +
+//            "ORDER BY t.name, s.time")
+//    List<ShowResponse> findShowsByMovieIdAndDate(@Param("movieId") int movieId, @Param("date") Date date);
 
 }

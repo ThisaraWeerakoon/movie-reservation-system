@@ -3,8 +3,10 @@ package com.trs.movie_ticket_reservation_system.controllers;
 import com.trs.movie_ticket_reservation_system.entities.Show;
 import com.trs.movie_ticket_reservation_system.request.ShowRequest;
 import com.trs.movie_ticket_reservation_system.request.ShowSeatRequest;
+import com.trs.movie_ticket_reservation_system.response.ShowResponse;
 import com.trs.movie_ticket_reservation_system.services.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +56,12 @@ public class ShowController {
             @RequestParam("movieId") Integer movieId) {
         return showService.getShowTimingsOnDate(date, theaterId, movieId);
     }
+
+//    @GetMapping("/showsByDate")
+//    public List<ShowResponse> getShows(@RequestParam int movie_id,
+//                                       @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) java.sql.Date date) {
+//        return showService.getShowsByMovieIdAndDate(movie_id, date);
+//    }
 
 
 }
