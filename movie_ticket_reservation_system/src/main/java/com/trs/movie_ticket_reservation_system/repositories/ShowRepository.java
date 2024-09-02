@@ -19,4 +19,5 @@ public interface ShowRepository extends JpaRepository<Show, Integer> {
 
     @Query(value = "select * from shows where movie_id = :movieId" , nativeQuery = true)
     public List<Show> getAllShowsOfMovie(@Param("movieId")Integer movieId);
+
 }

@@ -15,7 +15,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Theater {
 
     @Id
@@ -24,7 +23,7 @@ public class Theater {
 
     private String name;
 
-    @Column(unique = true)
+    @Column // Removed unique = true
     private String address;
 
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
@@ -32,6 +31,5 @@ public class Theater {
 
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
     private List<Show> showList = new ArrayList<>();
-
-
 }
+

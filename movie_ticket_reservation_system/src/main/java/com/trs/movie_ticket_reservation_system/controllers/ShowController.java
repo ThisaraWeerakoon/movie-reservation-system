@@ -1,15 +1,17 @@
 package com.trs.movie_ticket_reservation_system.controllers;
 
+import com.trs.movie_ticket_reservation_system.entities.Show;
 import com.trs.movie_ticket_reservation_system.request.ShowRequest;
 import com.trs.movie_ticket_reservation_system.request.ShowSeatRequest;
 import com.trs.movie_ticket_reservation_system.services.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.Date;
+import java.sql.Time;
+import java.util.List;
 
 @RestController
 @RequestMapping("/show")
@@ -35,6 +37,22 @@ public class ShowController {
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+
+    // Endpoint to get all shows by movie ID
+    @GetMapping("/movie/{movieId}")
+    public List<Show> getAllShowsByMovieId(@PathVariable Integer movieId) {
+        return showService.getAllShowsByMovieId(movieId);
+    }
+
+    // Endpoint to get show timings by date, theater ID, and movie ID
+    @GetMapping("/timings")
+    public List<Time> getShowTimingsOnDate(
+            @RequestParam("date") Date date,
+            @RequestParam("theaterId") Integer theaterId,
+            @RequestParam("movieId") Integer movieId) {
+        return showService.getShowTimingsOnDate(date, theaterId, movieId);
     }
 
 

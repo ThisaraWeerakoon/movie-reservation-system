@@ -14,6 +14,8 @@ import com.trs.movie_ticket_reservation_system.request.ShowSeatRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,4 +99,16 @@ public class ShowService {
 
 
     }
+
+    // Retrieve all shows for a given movie ID
+    public List<Show> getAllShowsByMovieId(Integer movieId) {
+        return showRepository.getAllShowsOfMovie(movieId);
+    }
+
+    // Get show timings on a specific date for a given theater and movie
+    public List<Time> getShowTimingsOnDate(Date date, Integer theaterId, Integer movieId) {
+        return showRepository.getShowTimingsOnDate(date, theaterId, movieId);
+    }
+
+
 }
