@@ -1,10 +1,20 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import React from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 export default function Component() {
-    
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+  const showId = searchParams.get('showId');
+  const date = searchParams.get('date');
+  const seatsParam = searchParams.get('seats');
+  const maxSeats = seatsParam ? parseInt(seatsParam, 10) : 4;
+
+  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+
   const rows = ['J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
   const seatsPerRow = [18, 18, 18, 16, 16, 16, 16, 16, 16, 16];
   const premiumRows = ['P2', 'P1'];
@@ -24,19 +34,46 @@ export default function Component() {
     },
   };
 
-  const renderSeats = (row: string, seats: number, isPremiun: boolean = false) => {
+  const handleSeatClick = (seatIndex: string) => {
+    setSelectedSeats((prevSeats) => {
+      if (prevSeats.includes(seatIndex)) {
+        return prevSeats.filter((seat) => seat !== seatIndex);
+      } else if (prevSeats.length < maxSeats) {
+        return [...prevSeats, seatIndex];
+      } else {
+        return [...prevSeats.slice(1), seatIndex];
+      }
+    });
+  };
+
+  const renderSeats = (row: string, seats: number, isPremium: boolean = false) => {
     const seatButtons = [];
     for (let i = 1; i <= seats; i++) {
-      const seatIndex = `${row}${isPremiun ? '-' : ''}${i}`;
-      const isOccupied = isPremiun ? occupiedPremiumSeats.includes(seatIndex) : occupiedNormalSeats.includes(seatIndex);
+      const seatIndex = `${row}${isPremium ? '-' : ''}${i}`;
+      const isOccupied = isPremium ? occupiedPremiumSeats.includes(seatIndex) : occupiedNormalSeats.includes(seatIndex);
+      const isSelected = selectedSeats.includes(seatIndex);
 
       seatButtons.push(
-        <Button key={seatIndex} variant={isOccupied ? 'ghost' : 'outline'} size="sm" className={`w-8 h-8 p-0 m-0.5 text-xs ${isOccupied ? 'opacity-50 bg-slate-300 cursor-not-allowed' : ''}`} onClick={() => !isOccupied && console.log(seatIndex)} disabled={isOccupied}>
+        <Button
+          key={seatIndex}
+          variant={isOccupied ? 'ghost' : isSelected ? 'default' : 'outline'}
+          size="sm"
+          className={`w-8 h-8 p-0 m-0.5 text-xs ${isOccupied ? 'opacity-50 bg-slate-300 cursor-not-allowed' : ''} ${isSelected ? 'bg-green-500 hover:bg-green-600' : ''}`}
+          onClick={() => !isOccupied && handleSeatClick(seatIndex)}
+          disabled={isOccupied}
+        >
           {i}
         </Button>
       );
     }
     return seatButtons;
+  };
+
+  const handleNext = () => {
+    if (selectedSeats.length === maxSeats) {
+      const selectedSeatsParam = selectedSeats.join('-');
+      router.push(`/booking/${id}/show/${showId}/ticket/1/?date=${date}&seats=${maxSeats}&selected_seats=${selectedSeatsParam}`);
+    }
   };
 
   return (
@@ -70,6 +107,13 @@ export default function Component() {
       <div className="text-center mt-8">
         <p className="text-sm font-semibold">SCREEN</p>
         <div className="w-full h-2 bg-blue-200 mt-2 rounded-full"></div>
+      </div>
+
+      <div className="mt-8">
+        <h2 className="text-lg font-semibold mb-2">Selected Seats: {selectedSeats.join(', ')}</h2>
+        <Button onClick={handleNext} disabled={selectedSeats.length !== maxSeats} className="w-full">
+          Next
+        </Button>
       </div>
     </div>
   );

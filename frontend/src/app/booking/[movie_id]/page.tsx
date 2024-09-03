@@ -2,36 +2,52 @@
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Mock data for cinemas and showtimes
 const cinemas = [
   {
     id: 1,
     name: 'Cinema City',
-    showtimes: ['10:00', '13:00', '16:00', '19:00', '22:00'],
+    showtimes: [
+      { time: '10:00', show_id: 's100' },
+      { time: '13:00', show_id: 's101' },
+      { time: '16:00', show_id: 's102' },
+      { time: '19:00', show_id: 's103' },
+      { time: '22:00', show_id: 's104' },
+    ],
   },
   {
     id: 2,
     name: 'Mega Movies',
-    showtimes: ['11:00', '14:00', '17:00', '20:00', '23:00'],
+    showtimes: [
+      { time: '11:00', show_id: 's200' },
+      { time: '14:00', show_id: 's201' },
+      { time: '17:00', show_id: 's202' },
+      { time: '20:00', show_id: 's203' },
+      { time: '23:00', show_id: 's204' },
+    ],
   },
   {
     id: 3,
     name: 'Star Cinema',
-    showtimes: ['09:30', '12:30', '15:30', '18:30', '21:30'],
+    showtimes: [
+      { time: '09:30', show_id: 's300' },
+      { time: '12:30', show_id: 's301' },
+      { time: '15:30', show_id: 's302' },
+      { time: '18:30', show_id: 's303' },
+      { time: '21:30', show_id: 's304' },
+    ],
   },
 ];
 
-export default function Booking({ params }: { params: { id: string } }) {
-  const [selectedDate, setSelectedDate] = useState<string>('');
+export default function Booking({ params }: { params: { movie_id: string } }) {
+  const [selectedDate, setSelectedDate] = useState<string>(() => new Date().toISOString().split('T')[0]);
   const [selectedCinema, setSelectedCinema] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
+  const [selectedShowId, setSelectedShowId] = useState<string>(''); // New state to keep track of the show ID
   const [numberOfSeats, setNumberOfSeats] = useState<number>(1);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
@@ -43,15 +59,22 @@ export default function Booking({ params }: { params: { id: string } }) {
     return date.toISOString().split('T')[0];
   });
 
-  const handleTimeSelection = (cinemaId: string, time: string) => {
+  useEffect(() => {
+    if (selectedDate) {
+      router.replace(`/booking/${params.movie_id}?date=${selectedDate}`);
+    }
+  }, [selectedDate, router, params.movie_id]);
+
+  const handleTimeSelection = (cinemaId: string, showtime: { time: string; show_id: string }) => {
     setSelectedCinema(cinemaId);
-    setSelectedTime(time);
+    setSelectedTime(showtime.time);
+    setSelectedShowId(showtime.show_id); // Store the show ID in the state
     setIsDialogOpen(true);
   };
 
   const handleSeatSelection = () => {
     setIsDialogOpen(false);
-    router.push(`/booking/${params.id}/${selectedCinema}/${selectedDate}/${selectedTime}?seats=${numberOfSeats}`);
+    router.push(`/booking/${params.movie_id}/show/${selectedShowId}?date=${selectedDate}?seats=${numberOfSeats}`);
   };
 
   return (
@@ -60,7 +83,7 @@ export default function Booking({ params }: { params: { id: string } }) {
       <div className="mb-6">
         <Select onValueChange={setSelectedDate}>
           <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select a date" />
+            <SelectValue>{new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</SelectValue>
           </SelectTrigger>
           <SelectContent>
             {dates.map((date) => (
@@ -75,9 +98,9 @@ export default function Booking({ params }: { params: { id: string } }) {
         <div key={cinema.id} className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">{cinema.name}</h2>
           <div className="flex flex-wrap gap-4">
-            {cinema.showtimes.map((time) => (
-              <Button key={time} variant="outline" disabled={!selectedDate} onClick={() => handleTimeSelection(cinema.id.toString(), time)}>
-                {time}
+            {cinema.showtimes.map((showtime) => (
+              <Button key={showtime.time} variant="outline" disabled={!selectedDate} onClick={() => handleTimeSelection(cinema.id.toString(), showtime)}>
+                {showtime.time}
               </Button>
             ))}
           </div>
