@@ -1,8 +1,12 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 // Mock data for cinemas and showtimes
@@ -26,6 +30,11 @@ const cinemas = [
 
 export default function Booking({ params }: { params: { id: string } }) {
   const [selectedDate, setSelectedDate] = useState<string>('');
+  const [selectedCinema, setSelectedCinema] = useState<string>('');
+  const [selectedTime, setSelectedTime] = useState<string>('');
+  const [numberOfSeats, setNumberOfSeats] = useState<number>(1);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const router = useRouter();
 
   // Generate an array of the next 7 days
   const dates = Array.from({ length: 7 }, (_, i) => {
@@ -34,8 +43,19 @@ export default function Booking({ params }: { params: { id: string } }) {
     return date.toISOString().split('T')[0];
   });
 
+  const handleTimeSelection = (cinemaId: string, time: string) => {
+    setSelectedCinema(cinemaId);
+    setSelectedTime(time);
+    setIsDialogOpen(true);
+  };
+
+  const handleSeatSelection = () => {
+    setIsDialogOpen(false);
+    router.push(`/booking/${params.id}/${selectedCinema}/${selectedDate}/${selectedTime}?seats=${numberOfSeats}`);
+  };
+
   return (
-    <div>
+    <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Book Your Movie</h1>
       <div className="mb-6">
         <Select onValueChange={setSelectedDate}>
@@ -56,17 +76,30 @@ export default function Booking({ params }: { params: { id: string } }) {
           <h2 className="text-2xl font-semibold mb-4">{cinema.name}</h2>
           <div className="flex flex-wrap gap-4">
             {cinema.showtimes.map((time) => (
-              // <Link key={time} href={`/booking/${params.id}/${cinema.id}/${selectedDate}/${time}`} passHref>
-              // change this to show.id
-              <Link key={time} href={`/booking/${params.id}/show/${params.id}`} passHref>
-                <Button variant="outline" disabled={!selectedDate}>
-                  {time}
-                </Button>
-              </Link>
+              <Button key={time} variant="outline" disabled={!selectedDate} onClick={() => handleTimeSelection(cinema.id.toString(), time)}>
+                {time}
+              </Button>
             ))}
           </div>
         </div>
       ))}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>How many seats?</DialogTitle>
+          </DialogHeader>
+          <div className="flex flex-wrap justify-center gap-3 py-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+              <Button key={num} variant={numberOfSeats === num ? 'default' : 'outline'} className="w-7 h-9 rounded-full" onClick={() => setNumberOfSeats(num)}>
+                {num}
+              </Button>
+            ))}
+          </div>
+          <Button onClick={handleSeatSelection} className="w-full">
+            Select Seats
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
