@@ -1,0 +1,17 @@
+use movie_ticket_reservation_system;
+CREATE VIEW MovieTheaterShowView AS
+SELECT 
+    s.movie_id,
+    s.date,
+    t.name AS theater_name,
+    t.address AS theater_address,
+    GROUP_CONCAT(s.time ORDER BY s.time ASC SEPARATOR ', ') AS show_times
+FROM 
+    shows s
+JOIN 
+    theaters t ON s.theater_id = t.id
+GROUP BY 
+    s.movie_id, s.date, s.theater_id
+ORDER BY
+    s.movie_id, s.date, t.name;
+    
