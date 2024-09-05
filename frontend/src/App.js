@@ -78,6 +78,12 @@ function RecipeReviewCard({ image, title, subheader, content }) {
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
             {/* Insert the content or method details here */}
+
+
+
+
+
+
           </Typography>
         </CardContent>
       </Collapse>
@@ -124,7 +130,7 @@ export default function SpacingGrid() {
                 image={`/static/images/cards/paella${value + 1}.jpg`}
                 title={`Dish ${value + 1}`}
                 subheader="September 14, 2016"
-                content="This is a description of the dish."
+                content="Thlgkfdlkgmdflkgmdf"
               />
             </Grid>
           ))}
